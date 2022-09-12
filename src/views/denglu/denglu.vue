@@ -32,19 +32,21 @@
 import { userNameRules, passwordRule } from "./config.js";
 import { onLogin } from "@/api/denglu";
 import { Toast } from "vant";
+import { mapMutations } from "vuex";
 export default {
   name:'Login',
   data() {
     return {
       user: {
         password: '',
-      username:'',
+        username:'',
       },
       userNameRules,
       passwordRule,
     };
   },
   methods: {
+    ...mapMutations(['SET_TOKEN']),
     async onSubmit(data) {
       try {
         const res = await onLogin(data);
@@ -55,14 +57,15 @@ export default {
             duration:2000   //显示时长
           })
           // commit 第一个参数是方法名称，第二个参数是需要携带的参数
-          // this.$store.commit('user/setToken',res.data.body.token)
+          this.$store.commit('SET_TOKEN',res.data.body)
           this.code()
         } else {
           Toast.fail('账号密码错误')
           this.user.username = ''
         }
       } catch (error) {
-        Toast.fail('网络异常！')
+        throw error
+        // Toast.fail('网络异常！')
       }
     },
     code() {

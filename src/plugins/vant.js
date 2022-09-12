@@ -7,13 +7,26 @@ import {
   Tabbar,
   TabbarItem,
   Form,
-  Field
-} from 'vant'
+  Field,
+  Grid,
+  GridItem,
+} from "vant";
 
-const components = [Button, Cell, VanImage, NavBar, Tabbar, TabbarItem,Form,Field]
+const components = [
+  Button,
+  Cell,
+  VanImage,
+  NavBar,
+  Tabbar,
+  TabbarItem,
+  Form,
+  Field,
+  Grid,
+  GridItem,
+];
 
 const registerVant = (Vue) => {
-  components.forEach((component) => Vue.use(component))
-}
+  components.forEach((component) => Vue.use(component));
+};
 
-export default registerVant
+export default registerVant;
